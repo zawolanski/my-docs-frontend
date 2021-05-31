@@ -1,27 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 import { createEditor, Descendant } from 'slate';
-import {
-  Editable,
-  RenderElementProps,
-  RenderLeafProps,
-  Slate,
-  withReact,
-} from 'slate-react';
-import { CodeElement } from './components/Elements/Code';
-import { DefaultElement } from './components/Elements/Default';
+import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import { Leaf } from './components/Elements/Leaf';
 import { toggleMark } from './util/mark';
 
 const App = (): JSX.Element => {
-  const renderElement = useCallback((props: RenderElementProps) => {
-    switch (props.element.type) {
-      case 'code':
-        return <CodeElement {...props} />;
-      default:
-        return <DefaultElement {...props} />;
-    }
-  }, []);
-
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
@@ -36,7 +19,16 @@ const App = (): JSX.Element => {
     },
     {
       type: 'paragraph',
-      children: [{ text: 'A second line of text in a paragraph.' }],
+      children: [
+        {
+          text: 'A second line of text in a paragraph.',
+          bold: true,
+          italic: true,
+        },
+        {
+          text: ' How are you?',
+        },
+      ],
     },
   ]);
 
@@ -52,7 +44,6 @@ const App = (): JSX.Element => {
         onChange={(newValue: Descendant[]) => setContent(newValue)}
       >
         <Editable
-          renderElement={renderElement}
           renderLeaf={renderLeaf}
           onKeyDown={(event) => {
             if (!event.ctrlKey) {
