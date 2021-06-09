@@ -1,38 +1,47 @@
-import { useMemo, useState } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, withReact } from 'slate-react';
+/* eslint-disable import/no-extraneous-dependencies */
+import { getMainDefinition } from '@apollo/client/utilities';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  split,
+} from '@apollo/client';
 
-const MainTemplate = ({ children }: { children: JSX.Element }): JSX.Element => {
-  const editor = useMemo(() => withReact(createEditor()), []);
-  const [content, setContent] = useState<Descendant[]>([
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-    {
-      type: 'paragraph',
-      children: [
-        {
-          text: 'A second line of text in a paragraph.',
-          bold: true,
-          italic: true,
-        },
-        {
-          text: ' How are you?',
-        },
-      ],
-    },
-  ]);
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000/graphql',
+  credentials: 'include',
+});
 
-  return (
-    <Slate
-      editor={editor}
-      value={content}
-      onChange={(newValue: Descendant[]) => setContent(newValue)}
-    >
-      {children}
-    </Slate>
-  );
-};
+const wsLink = new WebSocketLink({
+  uri: 'ws://localhost:4000/graphql',
+  options: {
+    reconnect: true,
+  },
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink
+);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: splitLink,
+});
+
+const MainTemplate = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => <ApolloProvider client={client}>{children}</ApolloProvider>;
 
 export default MainTemplate;
