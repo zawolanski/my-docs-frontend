@@ -4,7 +4,6 @@ import { Slate, withReact } from 'slate-react';
 import socketIOClient from 'socket.io-client';
 
 const socket = socketIOClient('http://localhost:4000');
-const operations: any[] = [];
 
 const initial: Descendant[] = [
   {
@@ -41,6 +40,7 @@ const SlateTemplate = ({
     );
 
     return () => socket.close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
