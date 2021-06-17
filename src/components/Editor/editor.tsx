@@ -1,11 +1,8 @@
-import { useMutation, useSubscription } from '@apollo/client';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Editable, RenderLeafProps, useSlate } from 'slate-react';
-import { CONTENT, CHANGE_CONTENT } from '../../graphql/content';
 import { toggleMark } from '../../util/mark';
 import { Leaf } from '../Elements/Leaf';
 import styled from './editor.module.scss';
-import { Subscription, MutationExecuteSubArgs } from '../../generated/graphql';
 
 const Editor = (): JSX.Element => {
   const renderLeaf = useCallback(
@@ -14,18 +11,6 @@ const Editor = (): JSX.Element => {
   );
 
   const editor = useSlate();
-
-  const { data } = useSubscription<Subscription>(CONTENT);
-  const [changeContent] = useMutation<string, MutationExecuteSubArgs>(
-    CHANGE_CONTENT,
-    { variables: { name: 'Seba' } }
-  );
-
-  useEffect(() => {
-    (async () => {
-      await changeContent();
-    })();
-  }, [editor.children]);
 
   return (
     <div className={styled.wrapper}>
