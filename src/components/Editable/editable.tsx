@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import { Editable, RenderLeafProps, useSlate } from 'slate-react';
-import { toggleMark } from '../../util/mark';
-import { Leaf } from '../Elements/Leaf';
-import styled from './editor.module.scss';
+import { Editable as Edit, RenderLeafProps, useSlate } from 'slate-react';
+import { toggleMark } from 'util/mark';
+import { Leaf } from 'components/Elements/Leaf';
+import styled from './editable.module.scss';
 
-const Editor = (): JSX.Element => {
+const Editable = (): JSX.Element => {
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
@@ -15,7 +15,7 @@ const Editor = (): JSX.Element => {
   return (
     <div className={styled.wrapper}>
       <div className={styled['editor-wrapper']}>
-        <Editable
+        <Edit
           renderLeaf={renderLeaf}
           onKeyDown={(event) => {
             if (!event.ctrlKey) {
@@ -55,4 +55,4 @@ const Editor = (): JSX.Element => {
   );
 };
 
-export default Editor;
+export default Editable;

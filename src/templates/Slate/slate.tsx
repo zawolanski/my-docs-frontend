@@ -15,7 +15,7 @@ const initial: Descendant[] = [
 const SlateTemplate = ({
   children,
 }: {
-  children: JSX.Element;
+  children: React.ReactNode;
 }): JSX.Element => {
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
