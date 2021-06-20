@@ -8,10 +8,12 @@ import axiosConfig from 'util/axios';
 import { useAuthContext } from 'context/auth/AuthContext';
 import { IAuthData } from 'context/auth/types';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 import styled from './signin.module.scss';
 import { SignInFormProps } from './types';
 
 const SignInForm = (): JSX.Element => {
+  const history = useHistory();
   const { setAuthState } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const { handleSubmit, control } = useForm<SignInFormProps>({
@@ -22,11 +24,17 @@ const SignInForm = (): JSX.Element => {
       const response = await axiosConfig.post('/user/login', data);
       setAuthState(response.data as IAuthData);
       enqueueSnackbar('You succesfully logged in.', { variant: 'success' });
+      history.push('/documents');
     } catch (e) {
       if (e?.request?.response)
         enqueueSnackbar(JSON.parse(e?.request?.response).message, {
           variant: 'error',
         });
+      else {
+        enqueueSnackbar(JSON.parse('Unknown error occurs.').message, {
+          variant: 'error',
+        });
+      }
     }
   };
 
