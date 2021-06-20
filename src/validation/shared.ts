@@ -12,5 +12,6 @@ export const emailValidation = Yup.string()
 
 export const passwordValidation = Yup.string()
   .password()
+  .minSymbols(0)
   .min(8, 'Min ${min} characters')
   .max(64, 'Max ${max} characters');
