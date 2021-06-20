@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { removeItemFromStorage, setItemInLocalStorage } from 'util/helpers';
 import { IAuthContext, IAuthData, SetAuthState } from './types';
 
@@ -15,6 +16,7 @@ const AuthContext = createContext<IAuthContext>({
   data: initialData,
   setAuthState: () => {},
   logout: () => {},
+  isAuthenticated: () => false,
 });
 
 const { Provider } = AuthContext;
@@ -25,6 +27,7 @@ export const AuthProvider = ({
   children: React.ReactNode;
 }): JSX.Element => {
   const [authData, setAuthData] = useState<IAuthData>(initialData);
+  const history = useHistory();
 
   const setAuthState: SetAuthState = (data) => {
     setItemInLocalStorage('authData', JSON.stringify(data));
@@ -33,10 +36,24 @@ export const AuthProvider = ({
 
   const logout = (): void => {
     removeItemFromStorage('authData');
+    history.push('/');
+  };
+
+  const isAuthenticated = (): boolean => {
+    if (
+      !authData._id ||
+      !authData.email ||
+      !authData.firstname ||
+      !authData.lastname ||
+      !authData.token
+    ) {
+      return false;
+    }
+    return true;
   };
 
   return (
-    <Provider value={{ data: authData, setAuthState, logout }}>
+    <Provider value={{ data: authData, setAuthState, logout, isAuthenticated }}>
       {children}
     </Provider>
   );

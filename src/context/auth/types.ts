@@ -12,4 +12,5 @@ export interface IAuthContext {
   data: IAuthData;
   setAuthState: SetAuthState;
   logout: () => void;
+  isAuthenticated: () => boolean;
 }
