@@ -1,6 +1,6 @@
 import { IconButton } from '@material-ui/core';
 import { useSlate } from 'slate-react';
-import { isMarkActive, toggleMark } from '../../util/mark';
+import { isMarkActive, toggleMark } from 'util/mark';
 import { useStyles } from './styles';
 import { MarkButtonProps } from './types';
 

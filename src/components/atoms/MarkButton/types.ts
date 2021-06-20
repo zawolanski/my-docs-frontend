@@ -1,4 +1,4 @@
-import { MarkTypes } from '../../types/util';
+import { MarkTypes } from 'types/util';
 
 export interface MarkButtonProps {
   children: JSX.Element | string;

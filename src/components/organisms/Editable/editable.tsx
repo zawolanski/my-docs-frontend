@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Editable as Edit, RenderLeafProps, useSlate } from 'slate-react';
 import { toggleMark } from 'util/mark';
-import { Leaf } from 'components/Elements/Leaf';
+import { Leaf } from 'components/slate/Elements/Leaf';
 import styled from './editable.module.scss';
 
 const Editable = (): JSX.Element => {

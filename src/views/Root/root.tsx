@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from 'views/Main/main';
-import Editor from 'components/Main/editor';
+import Editor from 'components/organisms/Main/editor';
 import SignIn from 'views/SignIn/signin';
 import MainTemplate from 'templates/Main/main';
 
