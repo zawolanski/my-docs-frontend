@@ -4,14 +4,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInSchema } from 'validation/signin';
 import PasswordField from 'components/molecules/controls/password.control';
 import _ from 'lodash';
+import axiosConfig from 'util/axios';
+import { useAuthContext } from 'context/auth/AuthContext';
+import { IAuthData } from 'context/auth/types';
+import { useSnackbar } from 'notistack';
 import styled from './signin.module.scss';
 import { SignInFormProps } from './types';
 
 const SignInForm = (): JSX.Element => {
+  const { setAuthState } = useAuthContext();
+  const { enqueueSnackbar } = useSnackbar();
   const { handleSubmit, control } = useForm<SignInFormProps>({
     resolver: yupResolver(SignInSchema),
   });
-  const onSubmit: SubmitHandler<SignInFormProps> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignInFormProps> = async (data) => {
+    try {
+      const response = await axiosConfig.post('/user/login', data);
+      setAuthState(response.data as IAuthData);
+      enqueueSnackbar('You succesfully logged in.', { variant: 'success' });
+    } catch (e) {
+      if (e?.request?.response)
+        enqueueSnackbar(JSON.parse(e?.request?.response).message, {
+          variant: 'error',
+        });
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styled.form}>
