@@ -1,7 +1,13 @@
+@import-normalize;
 :root {
   --light-grey: #e3e3e3;
-
   --toolbar-height: 2.5rem;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
 
 body {
@@ -16,4 +22,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  text-decoration: none;
 }
