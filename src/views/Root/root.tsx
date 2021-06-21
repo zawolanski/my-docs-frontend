@@ -13,9 +13,11 @@ const Root = (): JSX.Element => (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/signin" component={SignIn} />
-        <Route path="/editor/:id" component={Editor} />
+        <AuthRoute path="/document/:docId">
+          <Editor />
+        </AuthRoute>
         <AppBar>
-          <AuthRoute path="/documents">
+          <AuthRoute exact path="/documents">
             <Documents />
           </AuthRoute>
         </AppBar>
