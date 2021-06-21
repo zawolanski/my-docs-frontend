@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 import { IDocumentProps } from './types';
 import styles from './document.module.scss';
 
-const Document = ({ name }: IDocumentProps): JSX.Element => (
-  <Link to="/">
+const Document = ({ name, id }: IDocumentProps): JSX.Element => (
+  <Link to={`/document/${id}`}>
     <ListItem button>
       <ListItemIcon>
         <Avatar>

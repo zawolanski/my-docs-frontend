@@ -40,7 +40,7 @@ const Documents = (): JSX.Element => {
         }
       >
         {documents?.map((doc) => (
-          <Document name={doc.name} key={doc._id} />
+          <Document name={doc.name} id={doc._id} key={doc._id} />
         ))}
       </List>
     </Container>
