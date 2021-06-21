@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { removeItemFromStorage, setItemInLocalStorage } from 'util/helpers';
+import {
+  getItemFromStorage,
+  removeItemFromStorage,
+  setItemInLocalStorage,
+} from 'util/helpers';
 import { IAuthContext, IAuthData, SetAuthState } from './types';
 
 const initialData = {
@@ -26,7 +30,16 @@ export const AuthProvider = ({
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const [authData, setAuthData] = useState<IAuthData>(initialData);
+  const initialState = getItemFromStorage('authData');
+  let init: IAuthData | null = null;
+
+  if (initialState !== null) {
+    init = JSON.parse(initialState);
+  }
+
+  const [authData, setAuthData] = useState<IAuthData>(
+    init === null ? initialData : init
+  );
   const history = useHistory();
 
   const setAuthState: SetAuthState = (data) => {
