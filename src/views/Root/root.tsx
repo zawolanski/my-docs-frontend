@@ -5,6 +5,7 @@ import SignIn from 'views/SignIn/signin';
 import MainTemplate from 'templates/Main/main';
 import Documents from 'views/Documents/documents';
 import AuthRoute from 'components/atoms/AuthRoute/authRoute';
+import AppBar from 'components/organisms/AppBar/appbar';
 
 const Root = (): JSX.Element => (
   <Router>
@@ -13,9 +14,11 @@ const Root = (): JSX.Element => (
         <Route exact path="/" component={Main} />
         <Route path="/signin" component={SignIn} />
         <Route path="/editor/:id" component={Editor} />
-        <AuthRoute path="/documents">
-          <Documents />
-        </AuthRoute>
+        <AppBar>
+          <AuthRoute path="/documents">
+            <Documents />
+          </AuthRoute>
+        </AppBar>
       </Switch>
     </MainTemplate>
   </Router>
