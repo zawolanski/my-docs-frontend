@@ -2,6 +2,8 @@ import { useFetchContext } from 'context/fetch/FetchContext';
 import { useEffect, useState } from 'react';
 import { IDocument } from 'types/util';
 import { useSnackbar } from 'notistack';
+import Document from 'components/molecules/Document/documents';
+import { Typography, List, Container, ListSubheader } from '@material-ui/core';
 import styles from './document.module.scss';
 
 const Documents = (): JSX.Element => {
@@ -25,16 +27,23 @@ const Documents = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <div>
-        <div>Documents</div>
-        <div>
-          {documents?.map((doc) => (
-            <p key={doc._id}>{doc.name}</p>
-          ))}
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="md" className={styles.wrapper}>
+      <Typography variant="h4" component="h2">
+        Documents
+      </Typography>
+      <List
+        aria-labelledby="recent-subheader"
+        subheader={
+          <ListSubheader component="div" id="recent-subheader">
+            Recent
+          </ListSubheader>
+        }
+      >
+        {documents?.map((doc) => (
+          <Document name={doc.name} key={doc._id} />
+        ))}
+      </List>
+    </Container>
   );
 };
 
