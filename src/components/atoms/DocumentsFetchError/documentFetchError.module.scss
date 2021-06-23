@@ -1,0 +1,23 @@
+.wrapper {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-gap: 3.2rem;
+
+    a {
+        width: 65%;
+        justify-self: center;
+        height: 3rem;
+    }
+
+    svg {
+        color: red;
+        width: 5.2rem;
+        height: 5.2rem;
+        justify-self: center;
+    }
+
+    & > h2 {
+        max-width: 500px;
+        text-align: center;
+    }
+}
