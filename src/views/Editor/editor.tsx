@@ -42,6 +42,7 @@ const Editor = (): JSX.Element => {
     }
 
     fetchDocument();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [docId]);
 
   if (response === null)
