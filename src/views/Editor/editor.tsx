@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
 import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
 import DocumentFetchError from 'components/atoms/DocumentsFetchError/documentFetchError';
+import Main from 'components/organisms/Main/editor';
 import { ResponseData, ParamData } from './types';
 
 const Editor = (): JSX.Element => {
@@ -21,23 +22,27 @@ const Editor = (): JSX.Element => {
           data: res?.data,
         });
       } catch (e) {
-        const { data, status } = e.response;
-        if (
-          status === 404 ||
-          (status === 400 && data.message[0] === 'invalid document id')
-        )
-          setResponse({ status: 404, message: 'Document not found!' });
-        else if (status === 403) {
-          setResponse({
-            status: 403,
-            message: 'You are not authorized to open this document!',
-          });
-        } else {
-          setResponse({
-            status: 500,
-            message: 'Unknown error occured!',
-          });
+        if (e.response?.data && e.response?.status) {
+          const { data, status } = e.response;
+          if (
+            status === 404 ||
+            (status === 400 && data.message[0] === 'invalid document id')
+          ) {
+            setResponse({ status: 404, message: 'Document not found!' });
+            return;
+          }
+          if (status === 403) {
+            setResponse({
+              status: 403,
+              message: 'You are not authorized to open this document!',
+            });
+            return;
+          }
         }
+        setResponse({
+          status: 500,
+          message: 'Unknown error occured!',
+        });
       }
     }
 
@@ -55,7 +60,7 @@ const Editor = (): JSX.Element => {
   if (response?.status !== null && response?.status !== 200)
     return <DocumentFetchError>{response.message}</DocumentFetchError>;
 
-  return <div>{docId}</div>;
+  return <Main content={response.data?.content} />;
 };
 
 export default Editor;

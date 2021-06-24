@@ -2,28 +2,22 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { createEditor, Descendant, Editor, Operation } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import socketIOClient from 'socket.io-client';
+import { SlateTemplateProps } from './types';
 
 const socket = socketIOClient('http://localhost:4000');
 
-const initial: Descendant[] = [
-  {
-    type: 'paragraph',
-    children: [{ text: 'A line of text in a paragraph.' }],
-  },
-];
-
 const SlateTemplate = ({
   children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element => {
+  documentContent,
+}: SlateTemplateProps): JSX.Element => {
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
   const socketchange = useRef(false);
 
-  const [content, setContent] = useState<Descendant[]>(initial);
+  const [content, setContent] = useState<Descendant[]>(documentContent);
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     socket.on('connection', (data: string) => console.log(data));
     socket.on(
       'content',
