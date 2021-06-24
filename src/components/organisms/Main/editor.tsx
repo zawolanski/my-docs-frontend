@@ -10,7 +10,7 @@ import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
 import styled from './editor.module.scss';
 import { EditorProps } from './types';
 
-const Editor = ({ content }: EditorProps): JSX.Element | null => {
+const Editor = ({ content, permissions }: EditorProps): JSX.Element | null => {
   const { enqueueSnackbar } = useSnackbar();
   const [documentContent, setDocumentContent] =
     useState<Descendant[] | null | 'loading'>('loading');
@@ -45,8 +45,8 @@ const Editor = ({ content }: EditorProps): JSX.Element | null => {
   return (
     <SlateTemplate documentContent={documentContent}>
       <div className={styled.wrapper}>
-        <Toolbar />
-        <Editable />
+        {permissions === 'editor' ? <Toolbar /> : null}
+        <Editable permissions={permissions} />
       </div>
     </SlateTemplate>
   );

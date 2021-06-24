@@ -3,8 +3,9 @@ import { Editable as Edit, RenderLeafProps, useSlate } from 'slate-react';
 import { toggleMark } from 'util/mark';
 import { Leaf } from 'components/slate/Elements/Leaf';
 import styled from './editable.module.scss';
+import { EditableProps } from './types';
 
-const Editable = (): JSX.Element => {
+const Editable = ({ permissions }: EditableProps): JSX.Element => {
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
@@ -16,6 +17,7 @@ const Editable = (): JSX.Element => {
     <div className={styled.wrapper}>
       <div className={styled['editor-wrapper']}>
         <Edit
+          readOnly={!(permissions === 'editor')}
           renderLeaf={renderLeaf}
           onKeyDown={(event) => {
             if (!event.ctrlKey) {

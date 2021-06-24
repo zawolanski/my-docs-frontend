@@ -60,7 +60,15 @@ const Editor = (): JSX.Element => {
   if (response?.status !== null && response?.status !== 200)
     return <DocumentFetchError>{response.message}</DocumentFetchError>;
 
-  return <Main content={response.data?.content} />;
+  if (!response.data)
+    return <DocumentFetchError>Unknown error occured</DocumentFetchError>;
+
+  return (
+    <Main
+      content={response.data.content}
+      permissions={response.data.permissions}
+    />
+  );
 };
 
 export default Editor;
