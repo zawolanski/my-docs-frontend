@@ -1,6 +1,6 @@
 import Editable from 'components/organisms/Editable/editable';
 import SlateTemplate from 'templates/Slate/slate';
-import Toolbar from 'components/organisms/Toolbar/toolbar';
+import DocumentBar from 'components/organisms/DocumentBar/documentBar';
 import { useEffect, useState } from 'react';
 import CenteredError from 'components/atoms/DocumentsFetchError/documentFetchError';
 import { Descendant } from 'slate';
@@ -45,7 +45,7 @@ const Editor = ({ content, permissions }: EditorProps): JSX.Element | null => {
   return (
     <SlateTemplate documentContent={documentContent}>
       <div className={styled.wrapper}>
-        {permissions === 'editor' ? <Toolbar /> : null}
+        {permissions === 'editor' ? <DocumentBar /> : null}
         <Editable permissions={permissions} />
       </div>
     </SlateTemplate>
