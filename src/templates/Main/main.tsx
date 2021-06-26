@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import { AuthProvider } from 'context/auth/AuthContext';
 import { FetchProvider } from 'context/fetch/FetchContext';
 import SnackbarTemplate from 'templates/Snackbar/snackbar';
@@ -10,6 +10,7 @@ const MainTemplate = ({
   children: React.ReactNode;
 }): JSX.Element => (
   <ThemeProvider theme={MUItheme}>
+    <CssBaseline />
     <SnackbarTemplate>
       <AuthProvider>
         <FetchProvider>{children}</FetchProvider>
