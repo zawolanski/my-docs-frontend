@@ -13,7 +13,7 @@ const AppBar = ({ children }: { children: React.ReactNode }): JSX.Element => {
 
   return (
     <>
-      <MuiAppBar>
+      <MuiAppBar color="default">
         <Toolbar>
           <Typography className={styles.title} variant="h6">
             My docs
