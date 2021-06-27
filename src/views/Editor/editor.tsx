@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
 import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
 import DocumentFetchError from 'components/atoms/DocumentsFetchError/documentFetchError';
-import Main from 'components/organisms/Main/editor';
+import Main from 'components/slate/Editor/editor';
 import { ResponseData, ParamData } from './types';
 
 const Editor = (): JSX.Element => {

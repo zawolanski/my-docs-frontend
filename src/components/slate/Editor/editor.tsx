@@ -1,4 +1,4 @@
-import Editable from 'components/organisms/Editable/editable';
+import Editable from 'components/slate/Editable/editable';
 import SlateTemplate from 'templates/Slate/slate';
 import DocumentBar from 'components/organisms/DocumentBar/documentBar';
 import { useEffect, useState } from 'react';
