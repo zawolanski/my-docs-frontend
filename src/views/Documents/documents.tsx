@@ -1,7 +1,7 @@
 import { useFetchContext } from 'context/fetch/FetchContext';
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import Document from 'components/molecules/Document/documents';
+import Document from 'components/molecules/Document/document';
 import {
   Typography,
   List,
