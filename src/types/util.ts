@@ -15,3 +15,7 @@ export interface IDocument {
   permissions: Permissions;
   users: string[];
 }
+
+export interface IChildren {
+  children: React.ReactChild;
+}
