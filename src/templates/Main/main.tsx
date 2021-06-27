@@ -3,6 +3,7 @@ import { AuthProvider } from 'context/auth/AuthContext';
 import { FetchProvider } from 'context/fetch/FetchContext';
 import SnackbarTemplate from 'templates/Snackbar/snackbar';
 import { MUItheme } from 'theme/mui';
+import { SocketProvider } from 'context/socket/SocketContext';
 
 const MainTemplate = ({
   children,
@@ -13,7 +14,9 @@ const MainTemplate = ({
     <CssBaseline />
     <SnackbarTemplate>
       <AuthProvider>
-        <FetchProvider>{children}</FetchProvider>
+        <SocketProvider>
+          <FetchProvider>{children}</FetchProvider>
+        </SocketProvider>
       </AuthProvider>
     </SnackbarTemplate>
   </ThemeProvider>

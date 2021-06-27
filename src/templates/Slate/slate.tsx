@@ -1,15 +1,16 @@
+import { useSocketContext } from 'context/socket/SocketContext';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createEditor, Descendant, Editor, Operation } from 'slate';
 import { Slate, withReact } from 'slate-react';
-import socketIOClient from 'socket.io-client';
 import { SlateTemplateProps } from './types';
 
-const socket = socketIOClient('http://localhost:4000');
+// const socket = socketIOClient('http://localhost:4000');
 
 const SlateTemplate = ({
   children,
   documentContent,
 }: SlateTemplateProps): JSX.Element => {
+  const { socket } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
   const socketchange = useRef(false);
@@ -33,7 +34,9 @@ const SlateTemplate = ({
       }
     );
 
-    return () => socket.close();
+    return () => {
+      socket.close();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
