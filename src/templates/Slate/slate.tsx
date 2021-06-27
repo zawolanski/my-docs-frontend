@@ -1,21 +1,26 @@
 import { useSocketContext } from 'context/socket/SocketContext';
+import { ActionKind } from 'context/socket/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createEditor, Descendant, Editor, Operation } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { SlateTemplateProps } from './types';
 
-// const socket = socketIOClient('http://localhost:4000');
-
 const SlateTemplate = ({
   children,
   documentContent,
 }: SlateTemplateProps): JSX.Element => {
-  const { socket } = useSocketContext();
+  const { socket, dispatch, state } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
   const socketchange = useRef(false);
 
   const [content, setContent] = useState<Descendant[]>(documentContent);
+
+  useEffect(() => {
+    if (!state.wasContentChange)
+      dispatch({ type: ActionKind.ChangeContent, flag: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [content]);
 
   useEffect(() => {
     // eslint-disable-next-line no-console
