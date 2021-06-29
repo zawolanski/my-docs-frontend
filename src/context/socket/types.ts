@@ -1,21 +1,23 @@
+import { IConnectedUser } from 'templates/Slate/types';
+
 export type HandleContentChange = (flag: boolean) => void;
 
 export interface IState {
   wasContentChange: boolean;
-  connectedUsers: string[];
+  connectedUsers: IConnectedUser[];
 }
 
 export interface ISocketContext {
-  socket: SocketIOClient.Socket;
+  socket: SocketIOClient.Socket | undefined;
   state: IState;
   dispatch: React.Dispatch<SocketAction>;
 }
 
 export enum ActionKind {
   ChangeContent = 'CHANGE_CONTENT',
-  AddUser = 'ADD_USER',
+  UpdateUser = 'UPDATE_USER',
 }
 
 export type SocketAction =
   | { type: ActionKind.ChangeContent; flag: boolean }
-  | { type: ActionKind.AddUser; userId: string };
+  | { type: ActionKind.UpdateUser; connectedUsers: IConnectedUser[] };

@@ -4,10 +4,12 @@ export const reducer = (state: IState, action: SocketAction): IState => {
   switch (action.type) {
     case ActionKind.ChangeContent:
       return { ...state, wasContentChange: action.flag };
-    case ActionKind.AddUser:
+    case ActionKind.UpdateUser:
+      // if (state.connectedUsers.includes(action.userId)) return state;
+
       return {
         ...state,
-        connectedUsers: [...state.connectedUsers, action.userId],
+        connectedUsers: action.connectedUsers,
       };
     default:
       return state;
