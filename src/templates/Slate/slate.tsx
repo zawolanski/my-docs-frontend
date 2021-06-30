@@ -1,9 +1,8 @@
 import { useSocketContext } from 'context/socket/SocketContext';
 import { ActionKind } from 'context/socket/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { RootState } from 'redux/store';
 import { createEditor, Descendant, Editor } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { updateContent } from 'redux/slice/document';
@@ -19,7 +18,6 @@ const SlateTemplate = ({
   children,
   documentContent,
 }: SlateTemplateProps): JSX.Element => {
-  const document = useSelector((state: RootState) => state.document);
   const reduxDispatch = useDispatch();
   const { socket, dispatch, state } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
