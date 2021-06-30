@@ -10,10 +10,13 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
+import { useDispatch } from 'react-redux';
+import { addDocuments } from 'redux/slice/document';
 import styles from './document.module.scss';
 import { IDocumentFetched } from './types';
 
 const Documents = (): JSX.Element => {
+  const dispatch = useDispatch();
   const { authAxios } = useFetchContext();
   const [documents, setDocuments] = useState<IDocumentFetched | null>(null);
   const { enqueueSnackbar } = useSnackbar();
@@ -22,8 +25,15 @@ const Documents = (): JSX.Element => {
     const getUserDocuments = async (): Promise<void> => {
       try {
         const response = await authAxios?.get('/document/getall');
-        if (response?.data !== undefined)
+        if (response?.data !== undefined) {
           setDocuments(response.data as IDocumentFetched);
+          dispatch(
+            addDocuments({
+              own: response.data.own,
+              shared: response.data.shared,
+            })
+          );
+        }
       } catch (e) {
         enqueueSnackbar('Unknown error occured.', { variant: 'error' });
       }

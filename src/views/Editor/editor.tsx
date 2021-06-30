@@ -5,9 +5,12 @@ import { CircularProgress } from '@material-ui/core';
 import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
 import DocumentFetchError from 'components/atoms/DocumentsFetchError/documentFetchError';
 import Main from 'components/slate/Editor/editor';
+import { useDispatch } from 'react-redux';
+import { addCurrentDocument } from 'redux/slice/document';
 import { ResponseData, ParamData } from './types';
 
 const Editor = (): JSX.Element => {
+  const dispatch = useDispatch();
   const { docId } = useParams<ParamData>();
   const { authAxios } = useFetchContext();
   const [response, setResponse] = useState<ResponseData | null>(null);
@@ -21,6 +24,8 @@ const Editor = (): JSX.Element => {
           message: 'Data succesfully fetched',
           data: res?.data,
         });
+
+        dispatch(addCurrentDocument(res?.data));
       } catch (e) {
         if (e.response?.data && e.response?.status) {
           const { data, status } = e.response;

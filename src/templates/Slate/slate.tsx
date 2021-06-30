@@ -1,9 +1,12 @@
 import { useSocketContext } from 'context/socket/SocketContext';
 import { ActionKind } from 'context/socket/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { RootState } from 'redux/store';
 import { createEditor, Descendant, Editor } from 'slate';
 import { Slate, withReact } from 'slate-react';
+import { updateContent } from 'redux/slice/document';
 import {
   IError,
   IContent,
@@ -16,6 +19,8 @@ const SlateTemplate = ({
   children,
   documentContent,
 }: SlateTemplateProps): JSX.Element => {
+  const document = useSelector((state: RootState) => state.document);
+  const reduxDispatch = useDispatch();
   const { socket, dispatch, state } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
@@ -27,6 +32,7 @@ const SlateTemplate = ({
   useEffect(() => {
     if (!state.wasContentChange)
       dispatch({ type: ActionKind.ChangeContent, flag: false });
+    reduxDispatch(updateContent(JSON.stringify(content)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
