@@ -19,3 +19,24 @@ export interface IDocument {
 export interface IChildren {
   children: React.ReactChild;
 }
+
+export interface IAuthData {
+  email: string;
+  firstname: string;
+  lastname: string;
+  _id: string;
+}
+
+export interface IUser {
+  email: string;
+  exp: number;
+  iat: number;
+  firstname: string;
+  lastname: string;
+  _id: string;
+}
+
+export interface IConnectedUser {
+  clientId: string;
+  user: IUser;
+}

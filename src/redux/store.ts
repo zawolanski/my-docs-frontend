@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import documentReducer from './slice/document';
+import editorReducer from './slice/editor';
 
 export const store = configureStore({
   reducer: {
     document: documentReducer,
+    editor: editorReducer,
   },
 });
 
