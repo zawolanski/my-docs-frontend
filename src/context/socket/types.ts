@@ -1,4 +1,4 @@
-import { IConnectedUser } from 'templates/Slate/types';
+import { IConnectedUser } from 'types/util';
 
 export type HandleContentChange = (flag: boolean) => void;
 

@@ -1,16 +1,13 @@
-import { Tooltip, Typography, TextField, Button } from '@material-ui/core';
+import { Tooltip, Typography, TextField } from '@material-ui/core';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import DescriptionIcon from '@material-ui/icons/Description';
-import { useSocketContext } from 'context/socket/SocketContext';
-import { RouteParam } from 'templates/Slate/types';
 import { useStyles } from './styles';
+import Save from './Save/save';
 
 const InfoBar = (): JSX.Element => {
   const classes = useStyles();
-  const { socket } = useSocketContext();
-  const { docId } = useParams<RouteParam>();
 
   const [title, setTitle] = useState('Dokument 1');
 
@@ -42,18 +39,11 @@ const InfoBar = (): JSX.Element => {
             />
           </div>
         </Tooltip>
+        <div className={classes.iconsBar}>
+          <Save />
+        </div>
       </div>
-      <div className={classes.flex}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            if (socket) socket.emit('save', { room: docId, content: '123' });
-          }}
-        >
-          Save
-        </Button>
-      </div>
+      <div className={classes.flex}>Users</div>
     </div>
   );
 };

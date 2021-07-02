@@ -6,7 +6,7 @@ import CenterWrapper from 'components/atoms/CenterWrapper/centerWrapper';
 import DocumentFetchError from 'components/atoms/DocumentsFetchError/documentFetchError';
 import Main from 'components/slate/Editor/editor';
 import { useDispatch } from 'react-redux';
-import { addCurrentDocument } from 'redux/slice/document';
+import { addCurrentDocument } from 'redux/slice/editor';
 import { ResponseData, ParamData } from './types';
 
 const Editor = (): JSX.Element => {

@@ -1,6 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
+  iconsBar: {
+    margin: '0 1.5rem',
+    display: 'grid',
+    gridTemplateColumns: 'auto auto',
+    alignItems: 'center',
+    gridGap: '0.5rem',
+  },
   flex: {
     display: 'flex',
     alignItems: 'center',

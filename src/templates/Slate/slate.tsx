@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createEditor, Descendant, Editor } from 'slate';
 import { Slate, withReact } from 'slate-react';
-import { updateContent } from 'redux/slice/document';
+import {
+  setConnectedUsers,
+  updateContent,
+  setWasChange,
+} from 'redux/slice/editor';
 import {
   IError,
   IContent,
@@ -22,6 +26,7 @@ const SlateTemplate = ({
   const { socket, dispatch, state } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
+  const scoketID = useRef(socket?.id);
   const socketchange = useRef(false);
   const { docId } = useParams<RouteParam>();
 
@@ -30,6 +35,7 @@ const SlateTemplate = ({
   useEffect(() => {
     if (!state.wasContentChange)
       dispatch({ type: ActionKind.ChangeContent, flag: false });
+
     reduxDispatch(updateContent(JSON.stringify(content)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
@@ -43,21 +49,15 @@ const SlateTemplate = ({
       });
 
       socket.on('joinRoom', (data: IJoined) => {
-        dispatch({
-          type: ActionKind.UpdateUser,
-          connectedUsers: data.connectedUsers,
-        });
+        reduxDispatch(setConnectedUsers(data.connectedUsers));
       });
 
       socket.on('leaveRoom', (data: IJoined) => {
-        dispatch({
-          type: ActionKind.UpdateUser,
-          connectedUsers: data.connectedUsers,
-        });
+        reduxDispatch(setConnectedUsers(data.connectedUsers));
       });
 
       socket.on('content', ({ ops, editorId }: IContent) => {
-        if (editorId !== socket.id && ops !== null) {
+        if (editorId !== scoketID.current && ops !== null) {
           remote.current = true;
           Editor.withoutNormalizing(editor, () =>
             ops.forEach((op) => editor.apply(op))
@@ -89,10 +89,11 @@ const SlateTemplate = ({
         const ops = editor.operations.filter((o) => o.type !== 'set_selection');
 
         if (ops.length && !socketchange.current && !remote.current) {
+          reduxDispatch(setWasChange(true));
           socket.emit('changeContent', {
             room: docId,
             ops,
-            editorId: socket.id,
+            editorId: scoketID.current,
           });
         }
         socketchange.current = false;

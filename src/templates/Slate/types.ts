@@ -1,4 +1,5 @@
 import { Descendant, Operation } from 'slate';
+import { IConnectedUser } from 'types/util';
 
 export interface SlateTemplateProps {
   children: React.ReactNode;
@@ -17,11 +18,6 @@ export interface IUser {
   firstname: string;
   lastname: string;
   _id: string;
-}
-
-export interface IConnectedUser {
-  clientId: string;
-  user: IUser;
 }
 
 export interface IJoined {
