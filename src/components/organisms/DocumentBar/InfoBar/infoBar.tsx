@@ -3,17 +3,25 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DescriptionIcon from '@material-ui/icons/Description';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 import { useStyles } from './styles';
 import Save from './Save/save';
+import Users from './Users/users';
 
-const InfoBar = (): JSX.Element => {
+const InfoBar = (): JSX.Element | null => {
   const classes = useStyles();
+  const { connectedUsers, currentDocument } = useSelector(
+    ({ editor }: RootState) => editor
+  );
 
   const [title, setTitle] = useState('Dokument 1');
 
   const handleUpdateTitle = (value: string): void => {
     setTitle(value);
   };
+
+  if (!connectedUsers || !currentDocument) return null;
 
   return (
     <div className={clsx(classes.flex, classes.infoBarWrapper)}>
@@ -43,7 +51,9 @@ const InfoBar = (): JSX.Element => {
           <Save />
         </div>
       </div>
-      <div className={classes.flex}>Users</div>
+      <div className={classes.flex}>
+        <Users />
+      </div>
     </div>
   );
 };
