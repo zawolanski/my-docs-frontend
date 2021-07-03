@@ -57,6 +57,7 @@ const SlateTemplate = ({
       });
 
       socket.on('content', ({ ops, editorId }: IContent) => {
+        reduxDispatch(setWasChange(true));
         if (editorId !== scoketID.current && ops !== null) {
           remote.current = true;
           Editor.withoutNormalizing(editor, () =>
@@ -89,7 +90,6 @@ const SlateTemplate = ({
         const ops = editor.operations.filter((o) => o.type !== 'set_selection');
 
         if (ops.length && !socketchange.current && !remote.current) {
-          reduxDispatch(setWasChange(true));
           socket.emit('changeContent', {
             room: docId,
             ops,

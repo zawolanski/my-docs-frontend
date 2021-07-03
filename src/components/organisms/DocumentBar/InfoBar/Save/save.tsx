@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, CircularProgress } from '@material-ui/core';
 import { useSocketContext } from 'context/socket/SocketContext';
 import { useCallback, useEffect, useState } from 'react';
@@ -25,7 +26,6 @@ const Save = (): JSX.Element => {
   const dispatch = useDispatch();
   const [saving, setSaving] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const save = useCallback(
     debounce((con: string) => {
       if (socket && data._id === connectedUsers?.[0].user._id) {
@@ -33,9 +33,7 @@ const Save = (): JSX.Element => {
           room: _id,
           content: con,
         });
-        setSaving(false);
       }
-      dispatch(setWasChange(false));
     }, 1000),
     [connectedUsers]
   );
@@ -43,7 +41,15 @@ const Save = (): JSX.Element => {
   useEffect(() => {
     if (wasChange) setSaving(true);
     save(content);
-  }, [content, save, wasChange]);
+  }, [content, save]);
+
+  useEffect(() => {
+    if (socket)
+      socket.on('saved', () => {
+        dispatch(setWasChange(false));
+        setSaving(false);
+      });
+  }, []);
 
   return (
     <Tooltip title={saving ? 'Saving...' : 'Document saved'}>
