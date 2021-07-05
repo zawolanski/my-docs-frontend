@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useSocketContext } from 'context/socket/SocketContext';
-import { ActionKind } from 'context/socket/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -22,22 +22,18 @@ const SlateTemplate = ({
   children,
   documentContent,
 }: SlateTemplateProps): JSX.Element => {
-  const reduxDispatch = useDispatch();
-  const { socket, dispatch, state } = useSocketContext();
+  const dispatch = useDispatch();
+  const { socket } = useSocketContext();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
-  const scoketID = useRef(socket?.id);
+  const socketID = useRef(socket?.id);
   const socketchange = useRef(false);
   const { docId } = useParams<RouteParam>();
 
   const [content, setContent] = useState<Descendant[]>(documentContent);
 
   useEffect(() => {
-    if (!state.wasContentChange)
-      dispatch({ type: ActionKind.ChangeContent, flag: false });
-
-    reduxDispatch(updateContent(JSON.stringify(content)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(updateContent(JSON.stringify(content)));
   }, [content]);
 
   useEffect(() => {
@@ -48,17 +44,13 @@ const SlateTemplate = ({
         console.log(data);
       });
 
-      socket.on('joinRoom', (data: IJoined) => {
-        reduxDispatch(setConnectedUsers(data.connectedUsers));
-      });
-
-      socket.on('leaveRoom', (data: IJoined) => {
-        reduxDispatch(setConnectedUsers(data.connectedUsers));
+      socket.on('editRoom', (data: IJoined) => {
+        dispatch(setConnectedUsers(data.connectedUsers));
       });
 
       socket.on('content', ({ ops, editorId }: IContent) => {
-        reduxDispatch(setWasChange(true));
-        if (editorId !== scoketID.current && ops !== null) {
+        dispatch(setWasChange(true));
+        if (editorId !== socketID.current && ops !== null) {
           remote.current = true;
           Editor.withoutNormalizing(editor, () =>
             ops.forEach((op) => editor.apply(op))
@@ -67,15 +59,17 @@ const SlateTemplate = ({
           socketchange.current = true;
         }
       });
+
+      window.addEventListener('beforeunload', () => {
+        socket.emit('leaveRoom', docId);
+      });
     }
 
     return () => {
       if (socket) {
         socket.emit('leaveRoom', docId);
-        socket.disconnect();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [docId]);
 
   if (!socket) return <div>Invalid socket</div>;
@@ -93,7 +87,7 @@ const SlateTemplate = ({
           socket.emit('changeContent', {
             room: docId,
             ops,
-            editorId: scoketID.current,
+            editorId: socketID.current,
           });
         }
         socketchange.current = false;

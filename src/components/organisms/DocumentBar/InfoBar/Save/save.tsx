@@ -28,7 +28,11 @@ const Save = (): JSX.Element => {
 
   const save = useCallback(
     debounce((con: string) => {
-      if (socket && data._id === connectedUsers?.[0].user._id) {
+      if (
+        socket &&
+        connectedUsers.length > 0 &&
+        data._id === connectedUsers?.[0]._id
+      ) {
         socket.emit('save', {
           room: _id,
           content: con,

@@ -21,7 +21,7 @@ const InfoBar = (): JSX.Element | null => {
     setTitle(value);
   };
 
-  if (!connectedUsers || !currentDocument) return null;
+  if (!currentDocument) return null;
 
   return (
     <div className={clsx(classes.flex, classes.infoBarWrapper)}>
@@ -52,7 +52,7 @@ const InfoBar = (): JSX.Element | null => {
         </div>
       </div>
       <div className={classes.flex}>
-        <Users />
+        {connectedUsers.length > 0 ? <Users /> : null}
       </div>
     </div>
   );

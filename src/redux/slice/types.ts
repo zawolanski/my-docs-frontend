@@ -15,8 +15,12 @@ export interface IDocumentState {
   };
 }
 
+export interface IConnectedUsers extends IConnectedUser {
+  classNumber: number;
+}
+
 export interface IEditorState {
-  connectedUsers: IConnectedUser[] | null;
+  connectedUsers: IConnectedUsers[];
   wasChange: boolean;
   currentDocument: ICurrentDocument | null;
 }

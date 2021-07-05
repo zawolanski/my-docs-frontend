@@ -11,15 +11,6 @@ export interface IError {
   maessage: string;
 }
 
-export interface IUser {
-  email: string;
-  exp: number;
-  iat: number;
-  firstname: string;
-  lastname: string;
-  _id: string;
-}
-
 export interface IJoined {
   client: string;
   room: string;
