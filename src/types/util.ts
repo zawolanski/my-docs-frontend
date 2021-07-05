@@ -29,14 +29,11 @@ export interface IAuthData {
 
 export interface IUser {
   email: string;
-  exp: number;
-  iat: number;
   firstname: string;
   lastname: string;
   _id: string;
 }
 
-export interface IConnectedUser {
-  clientId: string;
-  user: IUser;
+export interface IConnectedUser extends IUser {
+  userType: 'logged' | 'guest';
 }
