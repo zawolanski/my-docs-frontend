@@ -25,3 +25,7 @@ export interface IContent {
 export interface RouteParam {
   docId: string;
 }
+
+export interface INewName {
+  newName: string;
+}

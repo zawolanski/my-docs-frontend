@@ -9,13 +9,16 @@ import {
   setConnectedUsers,
   updateContent,
   setWasChange,
+  updateDocumentName,
 } from 'redux/slice/editor';
+import { useSnackbar } from 'notistack';
 import {
   IError,
   IContent,
   IJoined,
   RouteParam,
   SlateTemplateProps,
+  INewName,
 } from './types';
 
 const SlateTemplate = ({
@@ -24,6 +27,7 @@ const SlateTemplate = ({
 }: SlateTemplateProps): JSX.Element => {
   const dispatch = useDispatch();
   const { socket } = useSocketContext();
+  const { enqueueSnackbar } = useSnackbar();
   const editor = useMemo(() => withReact(createEditor()), []);
   const remote = useRef(false);
   const socketID = useRef(socket?.id);
@@ -58,6 +62,14 @@ const SlateTemplate = ({
           remote.current = false;
           socketchange.current = true;
         }
+      });
+
+      socket.on('updateName', ({ newName }: INewName) => {
+        dispatch(updateDocumentName(newName));
+        enqueueSnackbar('Title updated succecfully.', {
+          variant: 'success',
+          autoHideDuration: 1000,
+        });
       });
 
       window.addEventListener('beforeunload', () => {
