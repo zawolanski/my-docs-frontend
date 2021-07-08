@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { useAuthContext } from 'context/auth/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
@@ -17,17 +18,17 @@ const Users = (): JSX.Element => {
 
   const filteredUsers = connectedUsers.filter((el) => el._id !== _id);
 
-  const avatars = filteredUsers.map(
-    ({ _id: id, firstname, lastname, classNumber }) => (
-      <Tooltip key={id} title={`${firstname} ${lastname}`}>
+  const avatars = filteredUsers.map(({ _id: id, name, settings }) =>
+    name ? (
+      <Tooltip key={id} title={name}>
         <Avatar
-          alt={`${firstname} ${lastname}`}
-          className={clsx(classes[classNumber], classes.size)}
+          alt={name}
+          className={clsx(classes[settings.colorNumber], classes.size)}
         >
-          {`${firstname[0]}${lastname[0]}`}
+          {name.trimStart()[0]}
         </Avatar>
       </Tooltip>
-    )
+    ) : null
   );
 
   return <div className={classes.wrapper}>{avatars}</div>;

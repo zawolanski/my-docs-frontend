@@ -27,13 +27,16 @@ export interface IAuthData {
   _id: string;
 }
 
-export interface IUser {
-  email: string;
-  firstname: string;
-  lastname: string;
-  _id: string;
+export interface IUserSettings {
+  colorNumber: number;
 }
 
-export interface IConnectedUser extends IUser {
+export interface IUser {
+  email: string;
+  name: string;
+  _id: string;
+  settings: IUserSettings;
   userType: 'logged' | 'guest';
 }
+
+export type IConnectedUser = IUser;
