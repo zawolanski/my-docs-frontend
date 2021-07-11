@@ -24,6 +24,8 @@ export const useStyles = makeStyles((theme) => ({
   infoBarWrapper: {
     padding: theme.spacing(1.25),
     justifyContent: 'space-between',
+    height: `${theme.sizes.infobar.height}rem`,
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   titleInputWrapper: {
     position: 'relative',
