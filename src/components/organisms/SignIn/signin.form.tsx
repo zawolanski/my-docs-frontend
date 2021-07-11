@@ -2,7 +2,7 @@ import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { Button, TextField } from '@material-ui/core';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SignInSchema } from 'validation/signin';
-import PasswordField from 'components/molecules/controls/password.control';
+import PasswordField from 'components/molecules/Controls/password.control';
 import _ from 'lodash';
 import axiosConfig from 'util/axios';
 import { useAuthContext } from 'context/auth/AuthContext';

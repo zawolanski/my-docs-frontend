@@ -1,6 +1,6 @@
-import Toolbar from 'components/organisms/DocumentBar/Toolbar/toolbar';
+import Toolbar from 'components/organisms/Toolbar/toolbar';
+import InfoBar from 'components/organisms/InfoBar/infoBar';
 import { useStyles } from './styles';
-import InfoBar from './InfoBar/infoBar';
 
 const DocumentBar = (): JSX.Element => {
   const classes = useStyles();
