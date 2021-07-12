@@ -5,7 +5,7 @@
   "dependencies": {
     "@hookform/resolvers": "^2.6.0",
     "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
+    "@material-ui/icons": "^5.0.0-beta.0",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.12.0",
@@ -22,6 +22,7 @@
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
     "hex-rgb": "^5.0.0",
+    "is-hotkey": "^0.1.8",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.0",
     "notistack": "^1.0.9",
