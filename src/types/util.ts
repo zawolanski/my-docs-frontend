@@ -48,7 +48,8 @@ export type MarkTypes =
   | 'sup'
   | 'sub'
   | 'strikethrough'
-  | 'link';
+  | 'link'
+  | 'remove';
 
 export type Keys =
   | 'mod+b'
