@@ -13,6 +13,7 @@ export type CodeElement = {
 
 export type CustomText = {
   text: string;
+  children: CustomText[];
   bold?: boolean;
   italic?: boolean;
   code?: boolean;
