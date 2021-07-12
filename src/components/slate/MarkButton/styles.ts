@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
 
 export const StyledIconButton = withStyles({
   root: {
-    margin: '0.3rem 0.2rem',
+    margin: '0.3rem 0.1rem',
     borderRadius: '15%',
   },
 })(IconButton);

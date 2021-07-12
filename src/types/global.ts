@@ -18,6 +18,10 @@ export type CustomText = {
   code?: boolean;
   underline?: boolean;
   sup?: boolean;
+  sub?: boolean;
+  strikethrough?: boolean;
+  link?: boolean;
+  url?: string;
 };
 
 declare module 'slate' {

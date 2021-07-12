@@ -26,5 +26,17 @@ export const Leaf = ({
     children = <sup>{children}</sup>;
   }
 
+  if (leaf.sub) {
+    children = <sub>{children}</sub>;
+  }
+
+  if (leaf.strikethrough) {
+    children = <s>{children}</s>;
+  }
+
+  if (leaf.link && leaf.url) {
+    children = <a href={leaf.url}>{children}</a>;
+  }
+
   return <span {...attributes}>{children}</span>;
 };

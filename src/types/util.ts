@@ -1,6 +1,5 @@
 import { Editor } from 'slate';
 
-export type MarkTypes = 'bold' | 'italic' | 'code' | 'underline' | 'sup';
 export type ToggleMarkFun = (editor: Editor, format: MarkTypes) => void;
 
 export type Permissions = 'editor' | 'viewer';
@@ -40,3 +39,23 @@ export interface IUser {
 }
 
 export type IConnectedUser = IUser;
+
+export type MarkTypes =
+  | 'bold'
+  | 'italic'
+  | 'code'
+  | 'underline'
+  | 'sup'
+  | 'sub'
+  | 'strikethrough'
+  | 'link';
+
+export type Keys =
+  | 'mod+b'
+  | 'mod+i'
+  | 'mod+u'
+  | 'mod+`'
+  | 'mod+.'
+  | 'mod+,'
+  | 'mod+5'
+  | 'mod+k';
