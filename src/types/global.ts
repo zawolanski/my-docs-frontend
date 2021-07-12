@@ -22,6 +22,7 @@ export type CustomText = {
   strikethrough?: boolean;
   link?: boolean;
   url?: string;
+  remove?: boolean;
 };
 
 declare module 'slate' {
