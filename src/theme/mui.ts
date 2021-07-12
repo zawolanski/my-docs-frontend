@@ -57,7 +57,7 @@ const createMyTheme = (options: ThemeOptions): Theme =>
         height: 3.75,
       },
       toolbar: {
-        height: 2.5,
+        height: 3,
       },
     },
     ...options,

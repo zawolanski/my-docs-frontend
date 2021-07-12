@@ -3,6 +3,7 @@ import FormatItalicTwoToneIcon from '@material-ui/icons/FormatItalicTwoTone';
 import CodeTwoToneIcon from '@material-ui/icons/CodeTwoTone';
 import FormatUnderlinedTwoToneIcon from '@material-ui/icons/FormatUnderlinedTwoTone';
 import MarkButton from 'components/slate/MarkButton/markbutton';
+import { Paper } from '@material-ui/core';
 import { useStyles } from './styles';
 
 const Toolbar = (): JSX.Element => {
@@ -10,18 +11,20 @@ const Toolbar = (): JSX.Element => {
 
   return (
     <div className={classes.wrapper}>
-      <MarkButton format="bold">
-        <FormatBoldTwoToneIcon />
-      </MarkButton>
-      <MarkButton format="italic">
-        <FormatItalicTwoToneIcon />
-      </MarkButton>
-      <MarkButton format="code">
-        <CodeTwoToneIcon />
-      </MarkButton>
-      <MarkButton format="underline">
-        <FormatUnderlinedTwoToneIcon />
-      </MarkButton>
+      <Paper elevation={0}>
+        <MarkButton format="bold">
+          <FormatBoldTwoToneIcon />
+        </MarkButton>
+        <MarkButton format="italic">
+          <FormatItalicTwoToneIcon />
+        </MarkButton>
+        <MarkButton format="code">
+          <CodeTwoToneIcon />
+        </MarkButton>
+        <MarkButton format="underline">
+          <FormatUnderlinedTwoToneIcon />
+        </MarkButton>
+      </Paper>
     </div>
   );
 };

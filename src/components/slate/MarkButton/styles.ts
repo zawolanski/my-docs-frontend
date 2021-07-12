@@ -1,11 +1,18 @@
-import { makeStyles } from '@material-ui/core';
-import hexRgb from 'hex-rgb';
+import { IconButton, makeStyles, withStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  active: {
-    color: 'black',
-  },
+export const useStyles = makeStyles((theme) => ({
   inactive: {
-    color: hexRgb('#000000', { format: 'css', alpha: 0.35 }),
+    color: theme.palette.text.secondary,
   },
-});
+  active: {
+    backgroundColor: theme.palette.action.selected,
+    color: theme.palette.text.primary,
+  },
+}));
+
+export const StyledIconButton = withStyles({
+  root: {
+    margin: '0.3rem 0.2rem',
+    borderRadius: '15%',
+  },
+})(IconButton);
