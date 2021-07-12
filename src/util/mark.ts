@@ -1,4 +1,4 @@
-import { remove } from 'lodash';
+import { omit, remove } from 'lodash';
 import { Editor } from 'slate';
 import { CustomText } from 'types/global';
 import { MarkTypes } from '../types/util';
@@ -41,5 +41,11 @@ export const toggleMark = (editor: Editor, format: MarkTypes): void => {
 export const removeMarks = (editor: Editor): void => {
   const marks = getMarks(editor);
   if (marks !== null)
-    Object.keys(marks).forEach((mark) => Editor.removeMark(editor, mark));
+    editor.getFragment().forEach((mark) => {
+      mark.children.forEach((ch) =>
+        Object.keys(omit(ch, 'text')).forEach((el) =>
+          Editor.removeMark(editor, el)
+        )
+      );
+    });
 };
