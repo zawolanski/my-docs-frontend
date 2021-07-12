@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from 'react';
 import { Editable as Edit, RenderLeafProps, useSlate } from 'slate-react';
-import { toggleMark } from 'util/mark';
+import { removeMarks, toggleMark } from 'util/mark';
 import { Leaf } from 'components/slate/Elements/Leaf';
 import { HOTKEYS } from 'util/hotkeys';
 import isHotkey from 'is-hotkey';
@@ -25,7 +25,8 @@ const Editable = ({ permissions }: EditableProps): JSX.Element => {
           autoFocus
           renderLeaf={renderLeaf}
           onKeyDown={(event) => {
-            if (
+            if (isHotkey('mod+/', event as any)) removeMarks(editor);
+            else if (
               !isHotkey('mod', event as any) &&
               !isHotkey('opt', event as any) &&
               !isHotkey('opt+mod', event as any)
