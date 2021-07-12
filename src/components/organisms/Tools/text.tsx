@@ -7,19 +7,19 @@ import FormatStrikethroughIcon from '@material-ui/icons/FormatStrikethrough';
 
 const TextTools = (): JSX.Element => (
   <>
-    <MarkButton format="bold">
+    <MarkButton format="bold" title="Bold (Ctrl+B)">
       <FormatBoldTwoToneIcon />
     </MarkButton>
-    <MarkButton format="italic">
+    <MarkButton format="italic" title="Italic (Ctrl+I)">
       <FormatItalicTwoToneIcon />
     </MarkButton>
-    <MarkButton format="code">
+    <MarkButton format="code" title="Code (Ctrl+`)">
       <CodeTwoToneIcon />
     </MarkButton>
-    <MarkButton format="underline">
+    <MarkButton format="underline" title="Underline (Ctrl+U)">
       <FormatUnderlinedTwoToneIcon />
     </MarkButton>
-    <MarkButton format="strikethrough">
+    <MarkButton format="strikethrough" title="Strikethrough (Ctrl+5)">
       <FormatStrikethroughIcon />
     </MarkButton>
   </>

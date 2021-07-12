@@ -4,10 +4,10 @@ import SuperscriptIcon from '@material-ui/icons/Superscript';
 
 const ScriptTools = (): JSX.Element => (
   <>
-    <MarkButton format="sub">
+    <MarkButton format="sub" title="Subscript (Ctrl+,)">
       <SubscriptIcon />
     </MarkButton>
-    <MarkButton format="sup">
+    <MarkButton format="sup" title="Superscript (Ctrl+.)">
       <SuperscriptIcon />
     </MarkButton>
   </>
