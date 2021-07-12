@@ -57,11 +57,10 @@ const createMyTheme = (options: ThemeOptions): Theme =>
         height: 3.75,
       },
       toolbar: {
-        height: 3,
+        height: 2.5,
       },
     },
     ...options,
   });
 
 export const MUItheme = createMyTheme({ palette, overrides });
-// export const MUItheme = createTheme({ palette, overrides });
