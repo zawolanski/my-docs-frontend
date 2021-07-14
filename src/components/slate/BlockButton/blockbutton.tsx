@@ -17,6 +17,7 @@ const BlockButton = ({
   return (
     <Tooltip title={title} arrow>
       <StyledIconButton
+        focusRipple={false}
         classes={{
           root: clsx(isActive ? classes.active : classes.inactive),
         }}

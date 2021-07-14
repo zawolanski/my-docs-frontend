@@ -10,9 +10,13 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const StyledIconButton = withStyles({
+export const StyledIconButton = withStyles((theme) => ({
   root: {
     margin: '0.3rem 0.1rem',
     borderRadius: '15%',
+
+    '&:focus': {
+      background: theme.palette.action.focus,
+    },
   },
-})(IconButton);
+}))(IconButton);
