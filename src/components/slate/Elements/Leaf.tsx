@@ -34,9 +34,5 @@ export const Leaf = ({
     children = <s>{children}</s>;
   }
 
-  if (leaf.link && leaf.url) {
-    children = <a href={leaf.url}>{children}</a>;
-  }
-
   return <span {...attributes}>{children}</span>;
 };

@@ -40,6 +40,8 @@ export interface IUser {
 
 export type IConnectedUser = IUser;
 
+export type BlockTypes = 'paragraph' | 'code' | 'link' | 'block-quote';
+
 export type MarkTypes =
   | 'bold'
   | 'italic'
@@ -48,7 +50,6 @@ export type MarkTypes =
   | 'sup'
   | 'sub'
   | 'strikethrough'
-  | 'link'
   | 'remove';
 
 export type Keys =

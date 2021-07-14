@@ -1,6 +1,6 @@
 import { omit, remove } from 'lodash';
 import { Editor } from 'slate';
-import { CustomText } from 'types/global';
+import { CustomText } from 'types/slate';
 import { MarkTypes } from '../types/util';
 
 export const getMarks = (editor: Editor): Omit<CustomText, 'text'> | null =>

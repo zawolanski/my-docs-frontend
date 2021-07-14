@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useSocketContext } from 'context/socket/SocketContext';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { createEditor, Descendant, Editor } from 'slate';
+import { createEditor, Descendant, Editor, Element } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import {
   setConnectedUsers,
