@@ -42,6 +42,8 @@ export type IConnectedUser = IUser;
 
 export type BlockTypes = 'paragraph' | 'code' | 'link' | 'block-quote';
 
+export type HeadingVariants = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1';
+
 export type MarkTypes =
   | 'bold'
   | 'italic'
