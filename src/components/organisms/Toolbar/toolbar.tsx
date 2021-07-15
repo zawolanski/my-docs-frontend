@@ -1,7 +1,8 @@
 import { Divider, Paper } from '@material-ui/core';
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 import BlockButton from 'components/slate/BlockButton/blockbutton';
-import { StyledTextField, useStyles } from './styles';
+import HeaderTypes from 'components/slate/HeaderType/headertype';
+import { useStyles } from './styles';
 import TextTools from '../Tools/text';
 import ScriptTools from '../Tools/script';
 import RemoveTools from '../Tools/remove';
@@ -13,7 +14,7 @@ const Toolbar = (): JSX.Element => {
     <div className={classes.wrapper}>
       <Paper elevation={0} className={classes.paper}>
         <Divider orientation="vertical" className={classes.divider} />
-        <StyledTextField variant="outlined" />
+        <HeaderTypes />
         <Divider orientation="vertical" className={classes.divider} />
         <BlockButton format="block-quote" title="Block quote">
           <FormatQuoteIcon />
