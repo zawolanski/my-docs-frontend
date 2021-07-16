@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import { RenderElementProps } from 'slate-react';
 import { useStyles } from './styles';
 
@@ -14,6 +15,12 @@ export const Element = ({
         <blockquote {...attributes} className={classes.blockquote}>
           {children}
         </blockquote>
+      );
+    case 'heading':
+      return (
+        <Typography {...attributes} variant={element.variant} component="p">
+          {children}
+        </Typography>
       );
     default:
       return <p {...attributes}>{children}</p>;

@@ -40,9 +40,18 @@ export interface IUser {
 
 export type IConnectedUser = IUser;
 
-export type BlockTypes = 'paragraph' | 'code' | 'link' | 'block-quote';
+export type BlockTypes =
+  | 'paragraph'
+  | 'code'
+  | 'link'
+  | 'block-quote'
+  | 'heading';
 
 export type HeadingVariants = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1';
+
+export type BlockOptions = {
+  variant: HeadingVariants;
+};
 
 export type MarkTypes =
   | 'bold'

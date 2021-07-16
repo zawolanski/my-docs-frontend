@@ -28,7 +28,12 @@ export type CustomText = {
 declare module 'slate' {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
-    Element: ParagraphElement | CodeElement | LinkElement | BlockQuoteElement;
+    Element:
+      | ParagraphElement
+      | CodeElement
+      | LinkElement
+      | BlockQuoteElement
+      | HeadingElement;
     Text: CustomText;
   }
 }

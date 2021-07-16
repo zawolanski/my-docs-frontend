@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Editor, Element, Transforms } from 'slate';
-import { BlockTypes } from 'types/util';
+import { BlockTypes, HeadingVariants } from 'types/util';
 
 export const isBlockActive = (editor: Editor, format: BlockTypes): boolean => {
   const [match] = Editor.nodes(editor, {
@@ -16,9 +16,18 @@ export const toggleBlock = (editor: Editor, format: BlockTypes): void => {
 
   Transforms.setNodes(
     editor,
-    { type: isActive ? 'paragraph' : 'block-quote' },
-    {
-      match: (n) => Editor.isBlock(editor, n),
-    }
+    { type: isActive ? 'paragraph' : format },
+    { match: (n) => Editor.isBlock(editor, n) }
+  );
+};
+
+export const toogleHeader = (
+  editor: Editor,
+  variant: HeadingVariants
+): void => {
+  Transforms.setNodes(
+    editor,
+    { type: variant !== 'body1' ? 'heading' : 'paragraph', variant },
+    { match: (n) => Editor.isBlock(editor, n), split: true }
   );
 };
