@@ -1,4 +1,9 @@
-import { IAuthData, IConnectedUser, IDocument } from 'types/util';
+import {
+  HeadingVariants,
+  IAuthData,
+  IConnectedUser,
+  IDocument,
+} from 'types/util';
 
 export interface ICurrentDocument extends IDocument {
   wasChange?: boolean;
@@ -19,4 +24,7 @@ export interface IEditorState {
   connectedUsers: IConnectedUser[];
   wasChange: boolean;
   currentDocument: ICurrentDocument | null;
+  editorElements: {
+    headers?: { variant: HeadingVariants; content: string }[];
+  };
 }

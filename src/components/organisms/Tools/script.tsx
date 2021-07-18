@@ -1,15 +1,15 @@
-import MarkButton from 'components/slate/MarkButton/markbutton';
 import SubscriptIcon from '@material-ui/icons/Subscript';
 import SuperscriptIcon from '@material-ui/icons/Superscript';
+import ToolbarButton from 'components/slate/ToolbarButton/toolbarButton';
 
 const ScriptTools = (): JSX.Element => (
   <>
-    <MarkButton format="sub" title="Subscript (Ctrl+,)">
+    <ToolbarButton isMark format="sub" tooltipTitle="Subscript (Ctrl+,)">
       <SubscriptIcon />
-    </MarkButton>
-    <MarkButton format="sup" title="Superscript (Ctrl+.)">
+    </ToolbarButton>
+    <ToolbarButton isMark format="sup" tooltipTitle="Superscript (Ctrl+.)">
       <SuperscriptIcon />
-    </MarkButton>
+    </ToolbarButton>
   </>
 );
 

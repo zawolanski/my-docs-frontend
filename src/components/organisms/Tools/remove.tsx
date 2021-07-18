@@ -1,10 +1,21 @@
 import FormatClearIcon from '@material-ui/icons/FormatClear';
-import MarkButton from 'components/slate/MarkButton/markbutton';
+import ToolbarButton from 'components/slate/ToolbarButton/toolbarButton';
+import { useSlate } from 'slate-react';
+import { removeMarks } from 'util/mark';
 
-const RemoveTools = (): JSX.Element => (
-  <MarkButton format="remove" title="Clear formatting (Ctrl+/)" isRemove>
-    <FormatClearIcon />
-  </MarkButton>
-);
+const RemoveTools = (): JSX.Element => {
+  const editor = useSlate();
+
+  return (
+    <ToolbarButton
+      isMark
+      format="remove"
+      tooltipTitle="Clear formatting (Ctrl+/)"
+      onClick={() => removeMarks(editor)}
+    >
+      <FormatClearIcon />
+    </ToolbarButton>
+  );
+};
 
 export default RemoveTools;

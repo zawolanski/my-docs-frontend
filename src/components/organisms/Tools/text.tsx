@@ -1,27 +1,31 @@
-import MarkButton from 'components/slate/MarkButton/markbutton';
 import FormatBoldTwoToneIcon from '@material-ui/icons/FormatBoldTwoTone';
 import FormatItalicTwoToneIcon from '@material-ui/icons/FormatItalicTwoTone';
 import CodeTwoToneIcon from '@material-ui/icons/CodeTwoTone';
 import FormatUnderlinedTwoToneIcon from '@material-ui/icons/FormatUnderlinedTwoTone';
 import FormatStrikethroughIcon from '@material-ui/icons/FormatStrikethrough';
+import ToolbarButton from 'components/slate/ToolbarButton/toolbarButton';
 
 const TextTools = (): JSX.Element => (
   <>
-    <MarkButton format="bold" title="Bold (Ctrl+B)">
+    <ToolbarButton isMark format="bold" tooltipTitle="Bold (Ctrl+B)">
       <FormatBoldTwoToneIcon />
-    </MarkButton>
-    <MarkButton format="italic" title="Italic (Ctrl+I)">
+    </ToolbarButton>
+    <ToolbarButton isMark format="italic" tooltipTitle="Italic (Ctrl+I)">
       <FormatItalicTwoToneIcon />
-    </MarkButton>
-    <MarkButton format="code" title="Code (Ctrl+`)">
+    </ToolbarButton>
+    <ToolbarButton isMark format="code" tooltipTitle="Code (Ctrl+`)">
       <CodeTwoToneIcon />
-    </MarkButton>
-    <MarkButton format="underline" title="Underline (Ctrl+U)">
+    </ToolbarButton>
+    <ToolbarButton isMark format="underline" tooltipTitle="Underline (Ctrl+U)">
       <FormatUnderlinedTwoToneIcon />
-    </MarkButton>
-    <MarkButton format="strikethrough" title="Strikethrough (Ctrl+5)">
+    </ToolbarButton>
+    <ToolbarButton
+      isMark
+      format="strikethrough"
+      tooltipTitle="Strikethrough (Ctrl+5)"
+    >
       <FormatStrikethroughIcon />
-    </MarkButton>
+    </ToolbarButton>
   </>
 );
 

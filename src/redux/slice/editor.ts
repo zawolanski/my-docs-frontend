@@ -8,6 +8,7 @@ const initialState: IEditorState = {
   connectedUsers: [],
   wasChange: false,
   currentDocument: null,
+  editorElements: {},
 };
 
 export const editorSlice = createSlice({

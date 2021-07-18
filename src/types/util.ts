@@ -72,3 +72,5 @@ export type Keys =
   | 'mod+,'
   | 'mod+5'
   | 'mod+k';
+
+export type ElementType = 'mark' | 'block';
